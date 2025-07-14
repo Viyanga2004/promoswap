@@ -332,6 +332,168 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+
+
+
+
+
+<!-- ✅ ADD THIS BLOCK FIRST (Pink bar + Popup + CSS + Script) -->
+
+<!-- Pink Info Bar -->
+<div id="info-bar">
+  🔒 Currently Running Offers on this Website — You are not in USA or you are using VPN / Proxy.
+  You cannot click this website — But you can visit. This option is for Affiliate (CPA) Network Managers.
+</div>
+
+<!-- Initial Geo Popup -->
+<div id="geo-popup">
+  <div class="popup-content">
+    <h2>Access Limited</h2>
+    <p>This website is intended for USA visitors only.<br>
+    It looks like you're not in the USA or using a VPN/Proxy.</p>
+    
+    <button onclick="closePopup()">Understood</button>
+    <button onclick="closeJustPopup()">For Affiliate Managers</button>
+  </div>
+</div>
+
+<!-- Lock Message Popup -->
+<div id="lock-popup">
+  <div class="popup-content">
+    <h2 style="color: green;">Thank You!</h2>
+    <p>We appreciate your understanding.<br>
+    This website remains locked for non-USA users.</p>
+  </div>
+</div>
+
+<!-- Style Block -->
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  /* ✅ Pink Info Bar */
+  #info-bar {
+    display: none;
+    background-color: #f8c8dc; /* light pink (charm color) */
+    color: #333;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  #geo-popup, #lock-popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  }
+
+  .popup-content h2 {
+    margin-bottom: 10px;
+    color: #dc3545; /* ✅ Red for Access Limited */
+  }
+
+  .popup-content p {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .popup-content button {
+    margin: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .popup-content button:hover {
+    background-color: #0056b3;
+  }
+
+  .no-click {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+</style>
+
+<!-- Script Block -->
+<script>
+  // ✅ Show Thank You + Lock popup
+  function closePopup() {
+    document.getElementById("geo-popup").style.display = "none";
+    document.getElementById("info-bar").style.display = "block";
+
+    const links = document.querySelectorAll("a");
+    links.forEach(link => {
+      link.classList.add("no-click");
+      link.title = "Link disabled outside USA";
+    });
+
+    document.getElementById("lock-popup").style.display = "flex";
+  }
+
+  // 🔵 Only close popup for Affiliate Managers (no thank you popup)
+  function closeJustPopup() {
+    document.getElementById("geo-popup").style.display = "none";
+    document.getElementById("info-bar").style.display = "block";
+
+    const links = document.querySelectorAll("a");
+    links.forEach(link => {
+      link.classList.add("no-click");
+      link.title = "Link disabled outside USA";
+    });
+  }
+
+  // 🌍 Check IP location
+  fetch('https://ipapi.co/json/')
+    .then(res => res.json())
+    .then(data => {
+      if (data.country !== 'US') {
+        document.getElementById("geo-popup").style.display = "flex";
+      }
+    })
+    .catch(() => {
+      document.getElementById("geo-popup").style.display = "flex";
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   <div class="container">
     <!-- Popup Modal -->
     <div class="popup" id="popup">
